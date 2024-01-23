@@ -1,34 +1,20 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "modulo-marina",
-
-    'summary': "El primer módulo de la clase de SGE",
-
+    'name': "Modulo SGE",
+    'version': '1.0',
+    'depends': ['base'],
+    'author': "Marina Martín",
+    'category': 'Category',
     'description': """
         Este módulo ha sido creado con scaffolding y está sincronizado en mi repositorio Github
     """,
-
-    'author': "Marina Martín",
-    'website': "https://www.ieshlanz.com",
-
-    # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
-    # for the full list
-    'category': 'Uncategorized',
-    'version': '0.1',
-
-    # any module necessary for this one to work correctly
-    'depends': ['base'],
-
-    # always loaded
+    # data files always loaded at installation
     'data': [
-        # 'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml',
+        'views/mymodule_view.xml',
     ],
-    # only loaded in demonstration mode
+    # data files containing optionally loaded demonstration data
     'demo': [
-        'demo/demo.xml',
+        'demo/demo_data.xml',
     ],
     "application": True,
     "installable": True,
