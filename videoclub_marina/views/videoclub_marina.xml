@@ -1,5 +1,56 @@
 <odoo>
   <data>
+    <!-- Accion de ventana -->
+    <record model="ir.actions.act_window" id="videoclub_marina.pelis_ventana">
+    <field name="name">Peliculas</field>
+    <field name="res_model">videoclub.pelis</field> <!--modelo asociado-->
+    <field name="view_mode">tree,form,kanban</field> <!--tipos de vistas-->
+    <field name="help" type="html"> <!-- ayuda si no hay campos -->
+      <h1> VIDEOCLUB </h1>
+      <p> LISTA DE PELIS VACÍA </p>
+    </field>
+    </record>
+
+    <!-- Vista arbol -->
+    <record model="ir.ui.view" id="videoclub_marina.pelis_arbol">
+    <field name="name">videoclub_marina.pelis_arbol</field>
+    <field name="model">videoclub.pelis</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="titulo"/>
+        <field name="director"/>
+        <field name="clasificacion"/>
+        <field name="presupuesto"/>
+        <field name="fechaestreno"/>
+      </tree>
+    </field>
+    </record>
+
+    <!-- Vista formulario -->
+    <record model="ir.ui.view" id="videoclub_marina.pelis_formulario">
+    <field name="name">videoclub_marina.pelis_formulario</field>
+    <field name="model">videoclub.pelis</field>
+    <field name="arch" type="xml">
+    <form string="pelis">
+    <group string="DATOS DE PELIS">
+    <field name="titulo"/>
+    <field name="director"/>
+    <field name="clasificacion"/>
+    <field name="presupuesto"/>
+    <field name="fechaestreno"/>
+    </group>
+    </form>
+    </field>
+    </record>
+
+    <!-- Top menu item -->
+        <menuitem name="VIDEOCLUB" id="videoclub_marina.menu_root"/>
+        <!-- menu categories -->
+        <menuitem name="Gestión Pelis" id="videoclub_marina.gestion_pelis"
+        parent="videoclub_marina.menu_root" />
+        <menuitem name="Pelis" id="videoclub_marina.menu_pelis" parent="videoclub_marina.gestion_pelis"
+        action="videoclub_marina.pelis_ventana" />
+  <odoo>
     <!-- explicit list view definition -->
 <!--
     <record model="ir.ui.view" id="videoclub_marina.list">
