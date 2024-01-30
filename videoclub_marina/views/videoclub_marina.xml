@@ -43,6 +43,42 @@
       </field>
     </record>
 
+    <!--Modelo CATEGORIA-->
+    <!-- Accion de ventana -->
+    <record model="ir.actions.act_window" id="videoclub_marina.categoria_ventana">
+      <field name="name">Categorias</field>
+      <field name="res_model">videoclub.categoria</field> <!--modelo asociado-->
+      <field name="view_mode">tree,form,kanban</field> <!--tipos de vistas-->
+      <field name="help" type="html"> <!-- ayuda si no hay campos -->
+        <h1> VIDEOCLUB </h1>
+        <p> LISTA DE CATEGORÍAS VACÍA </p>
+      </field>
+    </record>
+
+    <!-- Vista arbol -->
+    <record model="ir.ui.view" id="videoclub_marina.categoria_arbol">
+      <field name="name">videoclub_marina.categoria_arbol</field>
+      <field name="model">videoclub.categoria</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nombre"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Vista formulario -->
+    <record model="ir.ui.view" id="videoclub_marina.categoria_formulario">
+      <field name="name">videoclub_marina.categoria_formulario</field>
+      <field name="model">videoclub.categoria</field>
+      <field name="arch" type="xml">
+        <form string="categoria">
+          <group string="DATOS DE CATEGORIA">
+            <field name="nombre"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
     <!-- Top menu item -->
         <menuitem name="VIDEOCLUB" id="videoclub_marina.menu_root"/>
         <!-- menu categories -->
@@ -50,5 +86,10 @@
         parent="videoclub_marina.menu_root" />
         <menuitem name="Pelis" id="videoclub_marina.menu_pelis" parent="videoclub_marina.gestion_pelis"
         action="videoclub_marina.pelis_ventana" />
+        <!--Para la categoria-->
+        <menuitem name="Gestión Categorias" id="videoclub_marina.gestion_categoria"
+        parent="videoclub_marina.menu_root" />
+        <menuitem name="Categorias" id="videoclub_marina.menu_categoria" parent="videoclub_marina.gestion_categoria"
+        action="videoclub_marina.categoria_ventana" />
   </data>
 </odoo>

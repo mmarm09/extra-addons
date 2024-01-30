@@ -17,10 +17,4 @@ class videoclub_categoria(models.Model):
     _name = 'videoclub.categoria'
     _description = 'Categoría'
     #campos
-    nombre = fields.Char('Nombre',required=True,help='Nombre de la categoría')
-    #pelicula = fields.Many2one(
-    #    'partner.delivery.zone',
-    #    string='Delivery Zone',
-    #    ondelete='cascade',
-    #    required=True
-    #)
+    nombre = fields.Char('Nombre', required=True, help='Nombre de la categoría')
