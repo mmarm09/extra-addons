@@ -11,6 +11,7 @@ class videoclub_pelis(models.Model):
     clasificacion = fields.Selection([('TP','Todos los Públicos'),('men12','Menores de 12 años'),('may18','Mayores 18 años')], string='Clasificación', default='TP')
     presupuesto = fields.Integer()
     fechaestreno = fields.Date()
+    categoria = fields.Many2one('videoclub.categoria',string='Categoria',ondelete='cascade',required=True)
 
 class videoclub_categoria(models.Model):
     #atributos
