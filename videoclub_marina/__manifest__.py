@@ -10,8 +10,9 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
-        'views/views.xml',
+        'security/videoclub_security.xml'
+        'security/ir.model.access.csv',
+        'views/videoclub_marina.xml',
         'views/templates.xml',
     ],
     "application":True,

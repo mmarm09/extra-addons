@@ -50,6 +50,5 @@
         parent="videoclub_marina.menu_root" />
         <menuitem name="Pelis" id="videoclub_marina.menu_pelis" parent="videoclub_marina.gestion_pelis"
         action="videoclub_marina.pelis_ventana" />
-  <!--<odoo>-->
   </data>
 </odoo>
