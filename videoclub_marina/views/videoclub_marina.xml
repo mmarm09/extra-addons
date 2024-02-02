@@ -3,8 +3,10 @@
     <!-- Accion de ventana -->
     <record model="ir.actions.act_window" id="videoclub_marina.pelis_ventana">
       <field name="name">Peliculas</field>
-      <field name="res_model">videoclub.pelis</field> <!--modelo asociado-->
-      <field name="view_mode">tree,form,kanban</field> <!--tipos de vistas-->
+      <field name="res_model">videoclub.pelis</field> <!--modelo
+      asociado-->
+      <field name="view_mode">tree,form,kanban</field> <!--tipos
+      de vistas-->
       <field name="help" type="html"> <!-- ayuda si no hay campos -->
         <h1> VIDEOCLUB </h1>
         <p> LISTA DE PELIS VACÍA </p>
@@ -17,12 +19,12 @@
       <field name="model">videoclub.pelis</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="titulo"/>
-          <field name="director"/>
-          <field name="clasificacion"/>
-          <field name="presupuesto"/>
-          <field name="fechaestreno"/>
-          <field name="categoria"/>
+          <field name="titulo" />
+          <field name="director" />
+          <field name="clasificacion" />
+          <field name="presupuesto" />
+          <field name="fechaestreno" />
+          <field name="categoria" />
         </tree>
       </field>
     </record>
@@ -34,23 +36,57 @@
       <field name="arch" type="xml">
         <form string="pelis">
           <group string="DATOS DE PELIS">
-            <field name="titulo"/>
-            <field name="director"/>
-            <field name="clasificacion"/>
-            <field name="presupuesto"/>
-            <field name="fechaestreno"/>
-            <field name="categoria"/>
+            <field name="titulo" />
+            <field name="director" />
+            <field name="clasificacion" />
+            <field name="presupuesto" />
+            <field name="fechaestreno" />
+            <field name='foto' widget="image" style="width:20%;"/>
+            <field name="categoria" />
           </group>
         </form>
       </field>
     </record>
 
-    <!--Modelo CATEGORIA-->
+    <!-- Vista kanban -->
+    <record model="ir.ui.view" id="videoclub_marina.pelis_kanban">
+      <field name="name">videoclub_marina.pelis_kanban</field>
+      <field name="model">videoclub.pelis</field>
+      <field name="arch" type="xml">
+        <kanban sample="1">
+          <field name="id"/>
+          <templates>
+            <t t-name="kanban-box">
+              <div class="card" style="width:100%;">
+                <h5 class="card-header" style="background-color:#F1F1F1;"><field name="titulo"/></h5>
+                <div class="card-body d-flex row justify-content-around">
+                  <div style="width:50%;">
+                    <div><field name="director"/></div>
+                    <div><field name="clasificacion"/></div>
+                    <div><field name="presupuesto"/></div>
+                    <div><field name="fechaestreno"/></div>
+                    <div><field name="categoria"/></div>
+                  </div>
+                  <div style="width:50%;">
+                    <div><field name="foto" widget="image" style="width:70%;"/></div>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <!--Modelo
+    CATEGORIA-->
     <!-- Accion de ventana -->
     <record model="ir.actions.act_window" id="videoclub_marina.categoria_ventana">
       <field name="name">Categorias</field>
-      <field name="res_model">videoclub.categoria</field> <!--modelo asociado-->
-      <field name="view_mode">tree,form,kanban</field> <!--tipos de vistas-->
+      <field name="res_model">videoclub.categoria</field> <!--modelo
+      asociado-->
+      <field name="view_mode">tree,form,kanban</field> <!--tipos
+      de vistas-->
       <field name="help" type="html"> <!-- ayuda si no hay campos -->
         <h1> VIDEOCLUB </h1>
         <p> LISTA DE CATEGORÍAS VACÍA </p>
@@ -63,7 +99,7 @@
       <field name="model">videoclub.categoria</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="nombre"/>
+          <field name="nombre" />
         </tree>
       </field>
     </record>
@@ -75,23 +111,23 @@
       <field name="arch" type="xml">
         <form string="categoria">
           <group string="DATOS DE CATEGORIA">
-            <field name="nombre"/>
+            <field name="nombre" />
           </group>
         </form>
       </field>
     </record>
 
     <!-- Top menu item -->
-        <menuitem name="VIDEOCLUB" id="videoclub_marina.menu_root"/>
-        <!-- menu categories -->
-        <menuitem name="Gestión Pelis" id="videoclub_marina.gestion_pelis"
-        parent="videoclub_marina.menu_root" />
-        <menuitem name="Pelis" id="videoclub_marina.menu_pelis" parent="videoclub_marina.gestion_pelis"
-        action="videoclub_marina.pelis_ventana" />
-        <!--Para la categoria-->
-        <menuitem name="Gestión Categorias" id="videoclub_marina.gestion_categoria"
-        parent="videoclub_marina.menu_root" />
-        <menuitem name="Categorias" id="videoclub_marina.menu_categoria" parent="videoclub_marina.gestion_categoria"
-        action="videoclub_marina.categoria_ventana" />
+    <menuitem name="VIDEOCLUB" id="videoclub_marina.menu_root" />
+    <!-- menu categories -->
+    <menuitem name="Gestión Pelis" id="videoclub_marina.gestion_pelis"
+      parent="videoclub_marina.menu_root" />
+    <menuitem name="Pelis" id="videoclub_marina.menu_pelis" parent="videoclub_marina.gestion_pelis"
+      action="videoclub_marina.pelis_ventana" />
+    <!--Para
+    la categoria-->
+    <menuitem name="Categorias" id="videoclub_marina.menu_categoria"
+      parent="videoclub_marina.gestion_pelis"
+      action="videoclub_marina.categoria_ventana" />
   </data>
 </odoo>
