@@ -29,7 +29,7 @@
       </field>
     </record>
 
-    <!-- Vista formulario -->
+    <!-- Vista formulario pelis-->
     <record model="ir.ui.view" id="videoclub_marina.pelis_formulario">
       <field name="name">videoclub_marina.pelis_formulario</field>
       <field name="model">videoclub.pelis</field>
@@ -46,6 +46,7 @@
             <field name="compania" />
             <field name="subvencionado" />
             <field name="invertido" />
+            <field name="millonario" />
           </group>
         </form>
       </field>
@@ -139,10 +140,8 @@
       <field name="name">Compañías</field>
       <field name="res_model">res.partner</field>
       <field name="view_mode">tree,form</field>
-      <field name="domain">[('is_cine','=',True)]</field><!--lista
-      de filtros-->
-      <field name="context">{'default_is_cine':True}</field><!--debe
-      ser JSON-->
+      <field name="domain">[('is_cine','=',True)]</field><!--lista de filtros-->
+      <field name="context">{'default_is_cine':True}</field><!--debe ser JSON-->
     </record>
 
     <record model="ir.actions.act_window.view" id="videoclub_marina.companias_ventana_view_arbol">
@@ -163,6 +162,14 @@
       </field>
     </record>
 
+    <record model="ir.actions.act_window.view"
+      id="videoclub_marina.companias_ventana_view_formulario">
+      <field name="sequence" eval="2"></field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="videoclub_marina.companias_formulario"></field>
+      <field name="act_window_id" ref="videoclub_marina.companias_ventana"></field>
+    </record>
+
     <record model="ir.ui.view" id="videoclub_marina.companias_formulario">
       <field name="name">videoclub_marina.companias_formulario</field>
       <field name="model">res.partner</field>
@@ -179,15 +186,7 @@
           </page>
         </xpath>
       </field>
-    </record>
-
-    <record model="ir.actions.act_window.view"
-      id="videoclub_marina.companias_ventana_view_formulario">
-      <field name="sequence" eval="2"></field>
-      <field name="view_mode">form</field>
-      <field name="view_id" ref="videoclub_marina.companias_formulario"></field>
-      <field name="act_window_id" ref="videoclub_marina.companias_ventana"></field>
-    </record>
+    </record>    
 
     <!-- Top menu item -->
     <menuitem name="VIDEOCLUB" id="videoclub_marina.menu_root" />

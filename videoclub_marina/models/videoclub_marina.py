@@ -28,6 +28,17 @@ class videoclub_pelis(models.Model):
     @api.depends('presupuesto')
     def _valor_inversion(self):self.invertido=self.presupuesto*0.7
 
+    #Añadir el campo calculado millonario que sea de tipo Booleano, que se actualice de forma inmediata y que sea
+    #verdadero cuando el presupuesto de la película sea mayor a un millón de euros.
+    millonario = fields.Boolean(compute='_valor_millonario')
+    @api.depends('presupuesto')
+    def _valor_millonario(self):
+        for i in self:
+            if i.presupuesto > 1000000:
+                i.millonario = True
+            else:
+                i.millonario = False
+
 class videoclub_categoria(models.Model):
     #atributos
     _name = 'videoclub.categoria'
