@@ -7,6 +7,7 @@
     "website": "https://www.yourcompany.com",
     "category":"Tools",
     "depends":["base"],
+    "icon":"static/img/icono.png",
 
     # always loaded
     'data': [
