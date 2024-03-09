@@ -26,6 +26,79 @@
       </field>
     </record>
 
+    <!-- Accion de ventana Subasta-->
+    <record model="ir.actions.act_window" id="casa_subastas.subasta_ventana">
+      <field name="name">Subasta</field>
+      <field name="res_model">subastas.subasta</field> <!--modelo
+      asociado-->
+      <field name="view_mode">tree,form,kanban</field> <!--tipos
+      de vistas-->
+      <field name="help" type="html"> <!-- ayuda si no hay campos -->
+        <h1> CASA DE SUBASTAS </h1>
+        <p> LISTA DE SUBASTAS VACÍA </p>
+      </field>
+    </record>
+
+    <!-- Accion de ventana Compañia-->
+    <record model="ir.actions.act_window" id="casa_subastas.companias_ventana">
+      <field name="name">Compañías</field>
+      <field name="res_model">res.partner</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[('is_subasta','=',True)]</field><!--lista de filtros-->
+      <field name="context">{'default_is_subasta':True}</field><!--debe ser JSON-->
+    </record>
+
+    <!-- Nueva vista árbol de compañias -->
+    <record model="ir.ui.view" id="casa_subastas.companias_arbol">
+      <field name="name">casa_subastas.companias_arbol</field>
+      <field name="model">res.partner</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name" />
+          <field name="exito" />
+        </tree>
+      </field>
+    </record>
+
+    <!-- Referenciarla en acción de ventana nueva -->
+    <record model="ir.actions.act_window.view"
+      id="casa_subastas.companias_ventana_view_arbol">
+      <field name="sequence" eval="1" />
+      <field name="view_mode">tree</field>
+      <field name="view_id" ref="casa_subastas.companias_arbol" />
+      <field name="act_window_id"
+        ref="casa_subastas.companias_ventana" />
+    </record>
+
+
+    <record model="ir.ui.view" id="casa_subastas.companias_formulario">
+      <field name="name">casa_subastas.companias_formulario</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"></field>
+      <field name="mode">primary</field>
+      <field name="arch" type="xml">
+        <xpath expr="//sheet/notebook/page[@name='internal_notes']" position="after">
+          <page name="subasta" string="Subasta">
+            <group>
+              <group>
+                <field name="exito" />
+                <!-- En odoo 17 se pone invisible ="1" para poner el campo invisible -->
+                <field name="is_subasta" invisible ="1" />
+              </group>
+            </group>
+          </page>
+        </xpath>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="casa_subastas.companias_ventana_view_formulario">
+      <field name="sequence" eval="2"></field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="casa_subastas.companias_formulario"></field>
+      <field name="act_window_id" ref="casa_subastas.companias_ventana"></field>
+    </record>
+
+
     <!-- Vista arbol Pinturas-->
     <record model="ir.ui.view" id="casa_subastas.pinturas_arbol">
       <field name="name">casa_subastas.pinturas_arbol</field>
@@ -37,6 +110,10 @@
           <field name="fecha" />
           <field name="tecnica" />
           <field name="retrato" />
+          <field name="precio_inicial" />
+          <field name="precio_final" />
+          <field name="diferencia_precios" />
+          <field name="compania" />
         </tree>
       </field>
     </record>
@@ -53,6 +130,10 @@
             <field name="fecha" />
             <field name="tecnica" />
             <field name="retrato" />
+            <field name="precio_inicial" />
+            <field name="precio_final" />
+            <field name="diferencia_precios" />
+            <field name="compania" />
             <field name='foto' widget="image" style="width:10%;" />
           </group>
         </form>
@@ -84,6 +165,18 @@
                       <field name="tecnica" />
                     </div>
                     <div>Retrato <field name="retrato" /></div>
+                    <div>
+                      <field name="precio_inicial" />
+                    </div>
+                    <div>
+                      <field name="precio_final" />
+                    </div>
+                    <div>
+                      <field name="diferencia_precios" />
+                    </div>
+                    <div>
+                      <field name="compania" />
+                    </div>
                   </div>
                   <div style="width:50%;">
                     <div>
@@ -163,15 +256,91 @@
     </record>
 
 
+    <!-- Vista arbol Subasta-->
+    <record model="ir.ui.view" id="casa_subastas.subasta_arbol">
+      <field name="name">casa_subastas.subasta_arbol</field>
+      <field name="model">subastas.subasta</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nombre" />
+          <field name="pintura" />
+          <field name="fecha" />
+        </tree>
+      </field>
+    </record>
+
+    <!-- Vista formulario Subasta-->
+    <record model="ir.ui.view" id="casa_subastas.subasta_formulario">
+      <field name="name">casa_subastas.subasta_formulario</field>
+      <field name="model">subastas.subasta</field>
+      <field name="arch" type="xml">
+        <form string="subasta">
+          <group string="DATOS DE SUBASTAS">
+            <field name="nombre" />
+            <field name="pintura" />
+            <field name="fecha" />
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- Vista kanban Subasta-->
+    <record model="ir.ui.view" id="casa_subastas.subasta_kanban">
+      <field name="name">casa_subastas.subasta_kanban</field>
+      <field name="model">subastas.subasta</field>
+      <field name="arch" type="xml">
+        <kanban sample="1">
+          <field name="id" />
+          <templates>
+            <t t-name="kanban-box">
+              <div class="card" style="width:100%;">
+                <h5 class="card-header" style="background-color:#F1F1F1;">
+                  <field name="nombre" />
+                </h5>
+                <div class="card-body d-flex row">
+                  <div style="width:50%;">
+                    <div>
+                      <field name="pintura" />
+                    </div>
+                    <div>
+                      <field name="fecha" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+
     <!-- Top menu item -->
     <menuitem name="CASA DE SUBASTAS" id="casa_subastas.menu_root" />
-    <!-- menu categories -->
+    <!-- menu Padre  -->
     <menuitem name="Gestión de la Subasta" id="casa_subastas.gestion_subasta"
       parent="casa_subastas.menu_root" />
-    <menuitem name="Pinturas" id="casa_subastas.menu_pinturas" parent="casa_subastas.gestion_subasta"
+    <!-- menu Pinturas -->
+    <menuitem name="Pinturas" id="casa_subastas.menu_pinturas"
+      parent="casa_subastas.gestion_subasta"
       action="casa_subastas.pinturas_ventana" />
-      <menuitem name="Artistas" id="casa_subastas.menu_artistas" parent="casa_subastas.gestion_subasta"
+
+    <!-- menu Artistas -->
+    <menuitem name="Artistas" id="casa_subastas.menu_artistas"
+      parent="casa_subastas.gestion_subasta"
       action="casa_subastas.artistas_ventana" />
+
+    <!-- menu Subastas -->
+    <menuitem name="Subastas" id="casa_subastas.menu_subastas"
+      parent="casa_subastas.gestion_subasta"
+      action="casa_subastas.subasta_ventana" />
+
+    <!-- menu Padre Compañias -->
+    <menuitem name="Gestión compañías" id="casa_subastas.gestion_companias"
+      parent="casa_subastas.menu_root" />
+    <!-- menu Compañia -->
+    <menuitem name="Compañías" id="casa_subastas.menu_companias"
+      parent="casa_subastas.gestion_companias" action="casa_subastas.companias_ventana" />
 
   </data>
 </odoo>

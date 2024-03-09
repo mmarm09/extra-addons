@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--Grupo para el jefe de la casa de subastas -->
+    <record id="subasta_jefe" model="res.groups">
+        <field name="name">Subasta / Jefe</field>
+    </record>
+    <!--Grupo para becarios de la casa de subastas -->
+    <record id="subasta_becario" model="res.groups">
+        <field name="name">Subasta / Becario</field>
+    </record>
+</odoo>

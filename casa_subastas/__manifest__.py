@@ -6,7 +6,7 @@
         Este módulo ha sido creado para el proyecto final de SGE
     """,
 
-    #'icon_image':'static/description/icon.png',
+    'icon_image':'static/description/icon.png',
 
     'author': "Marina Martín",
     'website': "https://www.yourcompany.com",
@@ -23,6 +23,8 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
+        'security/subasta_security.xml',
+        'security/ir.model.access.csv',
         'views/casa_subastas.xml',
         'views/templates.xml',
     ],
