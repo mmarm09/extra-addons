@@ -1,0 +1,177 @@
+<odoo>
+  <data>
+    <!-- Accion de ventana Pinturas-->
+    <record model="ir.actions.act_window" id="casa_subastas.pinturas_ventana">
+      <field name="name">Pinturas</field>
+      <field name="res_model">subastas.pinturas</field> <!--modelo
+      asociado-->
+      <field name="view_mode">tree,form,kanban</field> <!--tipos
+      de vistas-->
+      <field name="help" type="html"> <!-- ayuda si no hay campos -->
+        <h1> CASA DE SUBASTAS </h1>
+        <p> LISTA DE PINTURAS VACÍA </p>
+      </field>
+    </record>
+
+    <!-- Accion de ventana Artistas-->
+    <record model="ir.actions.act_window" id="casa_subastas.artistas_ventana">
+      <field name="name">Artistas</field>
+      <field name="res_model">subastas.artistas</field> <!--modelo
+      asociado-->
+      <field name="view_mode">tree,form,kanban</field> <!--tipos
+      de vistas-->
+      <field name="help" type="html"> <!-- ayuda si no hay campos -->
+        <h1> CASA DE SUBASTAS </h1>
+        <p> LISTA DE ARTISTAS VACÍA </p>
+      </field>
+    </record>
+
+    <!-- Vista arbol Pinturas-->
+    <record model="ir.ui.view" id="casa_subastas.pinturas_arbol">
+      <field name="name">casa_subastas.pinturas_arbol</field>
+      <field name="model">subastas.pinturas</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="titulo" />
+          <field name="artista" />
+          <field name="fecha" />
+          <field name="tecnica" />
+          <field name="retrato" />
+        </tree>
+      </field>
+    </record>
+
+    <!-- Vista formulario Pinturas-->
+    <record model="ir.ui.view" id="casa_subastas.pinturas_formulario">
+      <field name="name">casa_subastas.pinturas_formulario</field>
+      <field name="model">subastas.pinturas</field>
+      <field name="arch" type="xml">
+        <form string="pinturas">
+          <group string="DATOS DE PINTURAS">
+            <field name="titulo" />
+            <field name="artista" />
+            <field name="fecha" />
+            <field name="tecnica" />
+            <field name="retrato" />
+            <field name='foto' widget="image" style="width:10%;" />
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- Vista kanban Pinturas-->
+    <record model="ir.ui.view" id="casa_subastas.pinturas_kanban">
+      <field name="name">casa_subastas.pinturas_kanban</field>
+      <field name="model">subastas.pinturas</field>
+      <field name="arch" type="xml">
+        <kanban sample="1">
+          <field name="id" />
+          <templates>
+            <t t-name="kanban-box">
+              <div class="card" style="width:100%;">
+                <h5 class="card-header" style="background-color:#F1F1F1;">
+                  <field name="titulo" />
+                </h5>
+                <div class="card-body d-flex row justify-content-around">
+                  <div style="width:50%;">
+                    <div>
+                      <field name="artista" />
+                    </div>
+                    <div>
+                      <field name="fecha" />
+                    </div>
+                    <div>
+                      <field name="tecnica" />
+                    </div>
+                    <div>Retrato <field name="retrato" /></div>
+                  </div>
+                  <div style="width:50%;">
+                    <div>
+                      <field name="foto" widget="image" style="width:70%;" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <!-- Vista arbol Artistas-->
+    <record model="ir.ui.view" id="casa_subastas.artistas_arbol">
+      <field name="name">casa_subastas.artistas_arbol</field>
+      <field name="model">subastas.artistas</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nombre" />
+          <field name="fecha_nacimiento" />
+          <field name="lugar_nacimiento" />
+          <field name="estilo_artistico" />
+        </tree>
+      </field>
+    </record>
+
+    <!-- Vista formulario Artistas-->
+    <record model="ir.ui.view" id="casa_subastas.artistas_formulario">
+      <field name="name">casa_subastas.artistas_formulario</field>
+      <field name="model">subastas.artistas</field>
+      <field name="arch" type="xml">
+        <form string="artistas">
+          <group string="DATOS DE ARTISTAS">
+            <field name="nombre" />
+            <field name="fecha_nacimiento" />
+            <field name="lugar_nacimiento" />
+            <field name="estilo_artistico" />
+            <field name="biografia" />
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- Vista kanban Artistas-->
+    <record model="ir.ui.view" id="casa_subastas.artistas_kanban">
+      <field name="name">casa_subastas.artistas_kanban</field>
+      <field name="model">subastas.artistas</field>
+      <field name="arch" type="xml">
+        <kanban sample="1">
+          <field name="id" />
+          <templates>
+            <t t-name="kanban-box">
+              <div class="card" style="width:100%;">
+                <h5 class="card-header" style="background-color:#F1F1F1;">
+                  <field name="nombre" />
+                </h5>
+                <div class="card-body d-flex row">
+                  <div style="width:50%;">
+                    <div>
+                      <field name="fecha_nacimiento" />
+                    </div>
+                    <div>
+                      <field name="lugar_nacimiento" />
+                    </div>
+                    <div>
+                      <field name="estilo_artistico" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+
+    <!-- Top menu item -->
+    <menuitem name="CASA DE SUBASTAS" id="casa_subastas.menu_root" />
+    <!-- menu categories -->
+    <menuitem name="Gestión de la Subasta" id="casa_subastas.gestion_subasta"
+      parent="casa_subastas.menu_root" />
+    <menuitem name="Pinturas" id="casa_subastas.menu_pinturas" parent="casa_subastas.gestion_subasta"
+      action="casa_subastas.pinturas_ventana" />
+      <menuitem name="Artistas" id="casa_subastas.menu_artistas" parent="casa_subastas.gestion_subasta"
+      action="casa_subastas.artistas_ventana" />
+
+  </data>
+</odoo>

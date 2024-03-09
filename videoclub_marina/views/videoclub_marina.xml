@@ -13,6 +13,19 @@
       </field>
     </record>
 
+    <!-- Accion de ventana -->
+    <record model="ir.actions.act_window" id="videoclub_marina.categoria_ventana">
+      <field name="name">Categorias</field>
+      <field name="res_model">videoclub.categoria</field> <!--modelo
+      asociado-->
+      <field name="view_mode">tree,form,kanban</field> <!--tipos
+      de vistas-->
+      <field name="help" type="html"> <!-- ayuda si no hay campos -->
+        <h1> VIDEOCLUB </h1>
+        <p> LISTA DE CATEGORÍAS VACÍA </p>
+      </field>
+    </record>
+
     <!-- Vista arbol -->
     <record model="ir.ui.view" id="videoclub_marina.pelis_arbol">
       <field name="name">videoclub_marina.pelis_arbol</field>
@@ -98,18 +111,7 @@
 
     <!--Modelo
     CATEGORIA-->
-    <!-- Accion de ventana -->
-    <record model="ir.actions.act_window" id="videoclub_marina.categoria_ventana">
-      <field name="name">Categorias</field>
-      <field name="res_model">videoclub.categoria</field> <!--modelo
-      asociado-->
-      <field name="view_mode">tree,form,kanban</field> <!--tipos
-      de vistas-->
-      <field name="help" type="html"> <!-- ayuda si no hay campos -->
-        <h1> VIDEOCLUB </h1>
-        <p> LISTA DE CATEGORÍAS VACÍA </p>
-      </field>
-    </record>
+    
 
     <!-- Vista arbol -->
     <record model="ir.ui.view" id="videoclub_marina.categoria_arbol">
