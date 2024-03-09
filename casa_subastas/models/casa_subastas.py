@@ -11,7 +11,8 @@ class subasta_pinturas(models.Model):
     # Campo Many2One para relacionar la pintura con el artista
     artista = fields.Many2one('subastas.artistas',ondelete='cascade',required=True)
     fecha = fields.Date(help='Fecha de creación')
-    tecnica = fields.Selection([('acuarela','Acuarela'),('oleo','Óleo'),('aerografia','Aerografía'),('PinPas','Pintura al pastel'),('otro','Otro')], string='Técnica usada', default='acuarela')
+    tecnica = fields.Selection([('acuarela','Acuarela'),('oleo','Óleo'),('aerografia','Aerografía'),
+                                ('PinPas','Pintura al pastel'),('otro','Otro')], string='Técnica usada', default='acuarela')
     retrato = fields.Boolean(default=False,help='Es un retrato')
     foto = fields.Binary()
 
